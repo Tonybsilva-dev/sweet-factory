@@ -71,6 +71,29 @@ Se o CLI pedir confirmação, manter:
 15. Implementar testes junto com a feature.
 16. Não criar código, componentes, rotas ou arquivos Next.js fora de `/application`.
 17. Não mover `/specs` para dentro de `/application`.
+18. Antes de implementar UI, ler `/specs/004-ui` e `/specs/009-design`.
+19. Nenhuma task de UI pode iniciar sem task completa no ClickUp e revisão do `.pen`.
+
+## Regras de design, Pencil e `.pen`
+
+O projeto separa funcionalidade de experiência visual:
+
+* `/specs/004-ui` define funcionalidade: páginas, fluxos e componentes esperados.
+* `/specs/009-design` define experiência visual: layout, estados, responsividade, protótipos Pencil e handoff para implementação.
+
+Pencil é apoio visual. Codex valida e implementa.
+
+As specs de produto, API e regras de negócio são a fonte da verdade. Se houver conflito entre um arquivo `.pen` e as specs, as specs vencem.
+
+Antes de iniciar qualquer task de UI, o agente deve confirmar:
+
+* Task criada no ClickUp em `Freelancers > Sweet Factory > List`.
+* Task completa conforme as regras de ClickUp.
+* Arquivo `.pen` disponível em `/specs/009-design/prototypes` ou revisão explícita dispensando protótipo.
+* Revisão do `.pen` registrada ou atualizada em `/specs/009-design/pencil-review.md`.
+* Rotas, permissões e contratos de API conferidos nas specs.
+
+O agente não deve implementar UI apenas a partir do `.pen`. O `.pen` orienta composição visual, mas não cria regra de negócio, contrato de API, permissão ou fluxo não documentado.
 
 ## Regras de ClickUp e versionamento
 
