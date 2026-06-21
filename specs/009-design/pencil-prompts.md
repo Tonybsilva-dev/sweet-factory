@@ -12,6 +12,9 @@ Este arquivo reúne os prompts oficiais para criação de protótipos `.pen` no 
 - Não criar fluxo visual sem API/spec correspondente, salvo quando marcado como pendência.
 - O design deve ser compatível com shadcn/ui, Tailwind CSS, React Hook Form + Zod e os componentes previstos em `/specs/004-ui/components.md`.
 - O idioma da interface deve ser português.
+- Usar `specs/009-design/trinketos-visual-reference.md` como referência visual e estrutural pública.
+- Não copiar textos de negócio do Trinketos.
+- Não incluir cadastro público no Sweet Factory.
 
 ## Prompt 1 — Base visual das rotas públicas
 
@@ -58,11 +61,17 @@ Fonte da verdade:
 - /specs/009-design/design-brief.md
 - /specs/009-design/routes-map.md
 - /specs/009-design/public-routes.md
+- /specs/009-design/trinketos-visual-reference.md
 - /specs/004-ui/pages.md
 - /specs/004-ui/flows.md
 - /specs/004-ui/components.md
 - /specs/003-api/rest-contracts.md
 - /specs/003-api/auth.md
+
+Referência visual:
+- Inspirar header, hero, cards, footer, páginas legais e auth no Trinketos.
+- Adaptar visual para Sweet Factory sem copiar conteúdo ou identidade literal.
+- Remover signup/cadastro público dos fluxos Sweet Factory.
 ```
 
 ## Prompt 2 — Landing page
@@ -103,6 +112,7 @@ Visual:
 - Deve parecer um produto SaaS de operação, não uma campanha promocional complexa.
 - Compatível com shadcn/ui.
 - Responsivo em mobile.
+- Inspirar estrutura no Trinketos: header sticky, hero com gradiente suave, cards de recursos, steps e footer multi-coluna.
 ```
 
 ## Prompt 3 — Login e recuperação de acesso
@@ -166,6 +176,8 @@ Regras:
 - Usar mensagens em português.
 - Usar formulários compatíveis com React Hook Form + Zod.
 - Usar componentes compatíveis com shadcn/ui.
+- Inspirar layout no login do Trinketos: fundo próprio, narrativa lateral e card de formulário.
+- Usar signup do Trinketos apenas como referência de estrutura de formulário, sem criar cadastro público no Sweet Factory.
 ```
 
 ## Prompt 4 — Cardápio público
@@ -219,6 +231,7 @@ Visual:
 - Produtos em cards ou lista simples.
 - Preços legíveis.
 - Compatível com shadcn/ui.
+- Usar cards/estados públicos do Trinketos como referência estrutural.
 ```
 
 ## Prompt 5 — Termos, unauthorized, 404 e loading
@@ -238,6 +251,7 @@ Tela /terms-and-conditions:
 - Conteúdo placeholder claramente marcado como pendente de revisão humana.
 - Link para voltar à página inicial.
 - Link para login.
+- Inspirar layout nas páginas Terms/Privacy/LGPD do Trinketos: container estreito, seções com borda, texto legível e bloco final de contato se houver contato definido.
 
 Tela /unauthorized:
 - Mensagem clara de acesso não autorizado.

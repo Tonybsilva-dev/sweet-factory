@@ -65,3 +65,28 @@ Componentes visuais esperados:
 Os tokens finais devem ser definidos ou confirmados no `.pen`.
 
 Enquanto não houver `.pen`, usar padrões do shadcn/ui e tema atual da aplicação.
+
+## Referência visual Trinketos
+
+O projeto Trinketos foi analisado como referência visual pública aprovada.
+
+Usar `specs/009-design/trinketos-visual-reference.md` como apoio para:
+
+- Header público sticky com fundo translúcido e blur.
+- Footer multi-coluna com marca, links de produto/suporte/legal e linha final.
+- Hero com gradiente suave, eyebrow, título forte, texto curto e CTAs.
+- Cards de funcionalidades com borda, fundo secundário suave, ícones e hover discreto.
+- Páginas legais em container estreito, com seções separadas por borda.
+- Layout de login com fundo próprio, narrativa lateral e formulário em card.
+- Formulários com labels visíveis, textos auxiliares e inputs compactos.
+
+Não copiar conteúdo de negócio nem identidade literal do Trinketos.
+
+Sweet Factory deve adaptar:
+
+- Textos para alimentação/doceria/SaaS.
+- CTAs para login e cardápio público.
+- Cards para custos, compras, produtos, cardápio, vendas e dashboard.
+- Login e recuperação de acesso para as APIs reais do Sweet Factory.
+
+Se houver conflito entre referência visual e specs do Sweet Factory, as specs vencem.
