@@ -21,6 +21,8 @@ export type AuditLogAction =
   | "daily_menu.published"
   | "daily_menu.closed"
   | "sale.created"
+  | "auth.password_recovery_requested"
+  | "auth.password_reset"
 
 export type AuditLogEntity =
   | "ingredient"
@@ -29,6 +31,7 @@ export type AuditLogEntity =
   | "product"
   | "daily_menu"
   | "sale"
+  | "user"
   | "audit_log"
 
 export type RegisterAuditLogInput = {
