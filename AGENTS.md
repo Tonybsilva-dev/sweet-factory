@@ -76,6 +76,12 @@ Se o CLI pedir confirmação, manter:
 
 Toda implementação deve estar associada a uma task previamente criada no ClickUp.
 
+O projeto usa ClickUp neste local:
+
+* Space: Freelancers
+* Folder: Sweet Factory
+* List: List
+
 O agente não pode iniciar implementação de código sem antes confirmar:
 
 * Space: Freelancers
@@ -88,21 +94,38 @@ O agente não pode iniciar implementação de código sem antes confirmar:
 
 Se não existir task no ClickUp, o agente deve parar e solicitar a criação da task antes de implementar qualquer código.
 
+Nenhuma task pode ser iniciada se estiver incompleta. Antes de qualquer implementação, a task do ClickUp deve possuir todos os campos essenciais preenchidos:
+
+* Nome da task.
+* Descrição completa.
+* Status.
+* Prioridade.
+* Tags.
+* Checklist.
+* Critérios de aceite.
+* Specs relacionadas.
+* Pendências conhecidas.
+* Validações obrigatórias.
+* Commits esperados.
+
+Se qualquer campo essencial estiver ausente, genérico demais ou incompleto, o agente deve atualizar a task no ClickUp antes de implementar. A implementação só pode começar depois que a task estiver completa o suficiente para orientar escopo, validação e entrega.
+
 ## Fluxo obrigatório por task
 
 Para cada task de implementação, seguir obrigatoriamente:
 
 1. Localizar a task correspondente no ClickUp.
 2. Confirmar que a task existe.
-3. Confirmar que a task possui descrição, checklist e critérios de aceite.
-4. Atualizar o status da task para `In Progress`.
-5. Ler as specs relacionadas.
-6. Implementar apenas o escopo da task.
-7. Rodar validações obrigatórias.
-8. Atualizar specs se houver mudança documentável.
-9. Atualizar a task no ClickUp com resumo da entrega.
-10. Criar commits separados.
-11. Atualizar o status da task para `Review` ou `Done/Closed`, conforme validação.
+3. Confirmar que a task possui todos os campos obrigatórios listados acima.
+4. Completar a task no ClickUp antes de implementar, se houver lacunas.
+5. Atualizar o status da task para `In Progress`.
+6. Ler as specs relacionadas.
+7. Implementar apenas o escopo da task.
+8. Rodar validações obrigatórias.
+9. Atualizar specs se houver mudança documentável.
+10. Atualizar a task no ClickUp com resumo da entrega.
+11. Criar commits separados quando solicitado ou quando a tarefa exigir versionamento.
+12. Atualizar o status da task para `Review` ou `Done/Closed`, conforme validação.
 
 ## Regra de commits
 
@@ -202,6 +225,18 @@ Usar:
 * `Done` ou `Closed`: implementação validada, testes passando e documentação atualizada.
 
 Se a lista do ClickUp usar `Closed` em vez de `Done`, considerar `Closed` como equivalente a `Done`.
+
+Uma task só pode ser movida para `Done` ou `Closed` depois que todos os itens abaixo forem verdadeiros:
+
+* `pnpm lint` passou.
+* `pnpm test` passou.
+* `pnpm build` passou.
+* Documentação SDD foi atualizada quando aplicável.
+* Task do ClickUp foi atualizada com resumo, validações, pendências e commits.
+* Commits esperados foram criados, quando a tarefa exigir commit.
+* Não há pendência bloqueante aberta.
+
+Se a implementação passou nas validações, mas ainda depende de validação humana, usar `Review`.
 
 
 ## Ordem de leitura recomendada
@@ -396,4 +431,3 @@ pnpm build
 ```
 
 A task só pode ir para `Done` ou `Closed` se as validações passarem.
-
