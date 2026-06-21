@@ -113,6 +113,9 @@ Status:
 - "Produto não encontrado."
 - "Ingrediente não encontrado."
 - "Material não encontrado."
+- "Token de recuperação inválido."
+- "Token de recuperação expirado."
+- "Senha e confirmação devem ser iguais."
 
 ## Regras
 
@@ -136,6 +139,8 @@ Comportamento atual:
 - Rotas protegidas sem token retornam `UNAUTHORIZED` com status `401`.
 - Token inválido ou usuário inativo retornam `UNAUTHORIZED` com status `401`.
 - Usuário autenticado sem role permitida retorna `FORBIDDEN` com status `403`.
+- Token de recuperação inválido, expirado ou já utilizado retorna erro padronizado.
+- Senha e confirmação divergentes no reset retornam `VALIDATION_ERROR`.
 - Erros inesperados retornam `INTERNAL_ERROR` com mensagem genérica.
 - Stack trace não é retornado para o frontend.
 - Erros inesperados são registrados internamente com `console.error`.

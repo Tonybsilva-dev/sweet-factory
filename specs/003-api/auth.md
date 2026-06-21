@@ -26,6 +26,9 @@ Autenticação simples com email e senha.
 ## Rotas públicas
 
 - `POST /api/auth/login`
+- `POST /api/auth/recover-password/request`
+- `POST /api/auth/recover-password/verify`
+- `POST /api/auth/recover-password/reset`
 
 ### POST /api/auth/login
 
@@ -53,6 +56,95 @@ Response:
   }
 }
 ```
+
+### POST /api/auth/recover-password/request
+
+Solicita recuperação de acesso.
+
+Request:
+
+```json
+{
+  "email": "admin@sweetfactory.local"
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "message": "Se o email existir, enviaremos instruções para recuperação."
+  }
+}
+```
+
+Comportamento:
+
+- Não revela se o email existe.
+- Gera token de recuperação apenas para usuário ativo encontrado.
+- Token expira em 30 minutos.
+- Tokens anteriores em aberto do usuário são invalidados.
+- Em ambiente diferente de produção, a resposta pode incluir `recoveryToken` para permitir testes locais sem provider de email.
+- Em produção, `recoveryToken` não deve ser retornado.
+- Provider de email real ainda não foi implementado.
+
+### POST /api/auth/recover-password/verify
+
+Valida token de recuperação.
+
+Request:
+
+```json
+{
+  "token": "string"
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "valid": true
+  }
+}
+```
+
+### POST /api/auth/recover-password/reset
+
+Redefine senha usando token válido.
+
+Request:
+
+```json
+{
+  "token": "string",
+  "password": "novaSenha123",
+  "confirmPassword": "novaSenha123"
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "message": "Senha redefinida com sucesso."
+  }
+}
+```
+
+Comportamento:
+
+- Token inválido retorna erro padronizado.
+- Token expirado retorna erro padronizado.
+- Token usado não pode ser reutilizado.
+- Senha e confirmação divergentes retornam `VALIDATION_ERROR`.
+- Nova senha é persistida somente como hash.
+- Senha e hash nunca são retornados.
+- Após redefinir senha, tokens em aberto do usuário são invalidados.
+- Gera log `auth.password_reset` quando aplicável.
 
 ## Rotas protegidas
 
@@ -101,13 +193,17 @@ Estado atual das permissões:
 Implementado em `/application`:
 
 - Model de usuário em `src/modules/auth/user.model.ts`.
+- Model de token de recuperação em `src/modules/auth/password-recovery-token.model.ts`.
 - Schemas Zod em `src/modules/auth/auth.schemas.ts`.
 - Service de login em `src/modules/auth/auth.service.ts`.
+- Service de recuperação de acesso em `src/modules/auth/password-recovery.service.ts`.
 - Hash e comparação de senha em `src/modules/auth/password.ts`.
+- Geração/hash de token de recuperação em `src/modules/auth/password-recovery-token.ts`.
 - Assinatura e validação de JWT em `src/modules/auth/jwt.ts`.
 - Usuário atual e proteção de rotas em `src/modules/auth/current-user.ts`.
 - Tipos em `src/modules/auth/auth.types.ts`.
 - Route Handler em `app/api/auth/login/route.ts`.
+- Route Handlers em `app/api/auth/recover-password/*/route.ts`.
 - Seed local em `scripts/seed-admin.ts`.
 
 Comportamento atual:
@@ -121,6 +217,9 @@ Comportamento atual:
 - Token ausente, inválido ou usuário inativo retorna `UNAUTHORIZED`.
 - Role insuficiente retorna `FORBIDDEN`.
 - Rotas protegidas passam `userId` para os serviços que geram audit log.
+- Recuperação de acesso não revela existência de email.
+- Token de recuperação expira em 30 minutos e é de uso único.
+- Reset de senha salva somente `passwordHash`.
 
 ## Seed local
 
@@ -148,6 +247,8 @@ O seed não deve criar usuário em produção.
 
 - Refresh token ainda não foi implementado.
 - Tela de login ainda não foi implementada.
+- Tela de recuperação de senha ainda não foi implementada.
+- Provider real de email para recuperação ainda não foi definido.
 - Cadastro público de usuário ainda não foi implementado.
 - Gestão administrativa de usuários ainda não foi implementada.
 - Captura de `ip` e `userAgent` para audit logs ainda não foi conectada.

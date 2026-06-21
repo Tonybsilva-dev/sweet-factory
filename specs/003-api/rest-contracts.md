@@ -44,6 +44,108 @@ Estado atual:
 - Roles suportadas: `admin` e `operator`.
 - Não há refresh token.
 
+### POST /api/auth/recover-password/request
+
+Request:
+
+```json
+{
+  "email": "admin@sweetfactory.local"
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "message": "Se o email existir, enviaremos instruções para recuperação."
+  }
+}
+```
+
+Response adicional em ambiente diferente de produção:
+
+```json
+{
+  "data": {
+    "message": "Se o email existir, enviaremos instruções para recuperação.",
+    "recoveryToken": "token-para-teste-local"
+  }
+}
+```
+
+Estado atual:
+
+- Implementado.
+- Rota pública.
+- Não revela se o email existe.
+- Gera token apenas para usuário ativo.
+- Token expira em 30 minutos.
+- Invalida tokens anteriores em aberto do usuário.
+- Provider de email real ainda não foi implementado.
+
+### POST /api/auth/recover-password/verify
+
+Request:
+
+```json
+{
+  "token": "string"
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "valid": true
+  }
+}
+```
+
+Estado atual:
+
+- Implementado.
+- Rota pública.
+- Token inválido retorna erro padronizado.
+- Token expirado retorna erro padronizado.
+- Token usado retorna erro padronizado.
+
+### POST /api/auth/recover-password/reset
+
+Request:
+
+```json
+{
+  "token": "string",
+  "password": "novaSenha123",
+  "confirmPassword": "novaSenha123"
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "message": "Senha redefinida com sucesso."
+  }
+}
+```
+
+Estado atual:
+
+- Implementado.
+- Rota pública.
+- Valida token/código de recuperação.
+- Valida confirmação de senha.
+- Salva nova senha com hash.
+- Não retorna senha nem hash.
+- Invalida tokens em aberto do usuário após reset.
+- Gera audit log `auth.password_reset`.
+
 ## Ingredients
 
 ### GET /ingredients
