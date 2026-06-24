@@ -4,9 +4,17 @@ Checklist para revisar arquivos `.pen` antes da implementação.
 
 ## Papel da revisão
 
-Pencil é apoio visual. Codex é responsável por validar o protótipo contra specs, APIs reais, regras de auth e restrições técnicas antes de implementar.
+Pencil é a fonte principal para criação visual das telas.
 
-Specs e APIs são a fonte da verdade. Se houver conflito entre `.pen`, referência visual e specs, as specs vencem.
+Codex é responsável por validar o protótipo contra specs, APIs reais, regras de auth e restrições técnicas antes de implementar.
+
+A revisão do `.pen` deve aprovar explicitamente a solução visual antes de qualquer implementação de UI.
+
+Specs e APIs são a fonte da verdade funcional. Pencil/`.pen` vence em decisões visuais aprovadas.
+
+Se houver conflito entre `.pen`, referência visual e specs/API, registrar a divergência e pedir decisão humana antes de implementar.
+
+Codex não deve corrigir ou reinventar layout visual por conta própria durante a implementação.
 
 ## Arquivos de protótipo esperados
 
@@ -15,6 +23,28 @@ Specs e APIs são a fonte da verdade. Se houver conflito entre `.pen`, referênc
 - `specs/009-design/prototypes/full-mvp.pen`: opcional, visão consolidada do MVP.
 
 Cada arquivo `.pen` deve ser revisado separadamente quando orientar implementação.
+
+## Aprovação obrigatória
+
+Nenhuma implementação de UI pode iniciar enquanto o `.pen` estiver com status `bloqueado`.
+
+Status possíveis:
+
+- `bloqueado`: não implementar.
+- `aprovado com ajustes`: implementar somente se os ajustes forem documentados e não bloqueantes.
+- `aprovado`: implementação liberada.
+
+Para aprovar um `.pen`, a revisão deve confirmar:
+
+- [ ] O design visual completo foi criado no Pencil.
+- [ ] Cada página/estado está em frame próprio.
+- [ ] Componentes reutilizáveis estão no frame `Design System` ou equivalente.
+- [ ] Frames de página apontam ou correspondem aos componentes do design system.
+- [ ] Estados loading/error/empty/success/permission foram definidos.
+- [ ] Responsividade foi definida.
+- [ ] APIs consumidas foram mapeadas.
+- [ ] Divergências contra specs/API foram registradas.
+- [ ] Decisões visuais estão aprovadas pelo responsável ou registradas como pendência não bloqueante.
 
 ## Revisão — rotas públicas
 
@@ -119,6 +149,7 @@ Uso:
 - [ ] O protótipo não cria regra de negócio nova.
 - [ ] O protótipo respeita contratos em `/specs/003-api/rest-contracts.md`.
 - [ ] O protótipo usa `trinketos-visual-reference.md` apenas como referência visual.
+- [ ] O protótipo define a fonte visual principal para implementação.
 
 ## Rotas e navegação
 
@@ -146,6 +177,8 @@ Uso:
 - [ ] Pendências foram registradas.
 - [ ] Decisões visuais foram registradas.
 - [ ] Task ClickUp correspondente está completa.
+- [ ] Handoff para Codex foi atualizado.
+- [ ] O status final da revisão permite implementação.
 - [ ] Implementação pode iniciar no Codex.
 
 ## Resultado da revisão

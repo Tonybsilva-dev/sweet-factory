@@ -8,6 +8,10 @@ Sweet Factory é um sistema operacional para precificação, cardápio e control
 
 Criar uma interface clara, rápida e confiável para uso recorrente. O produto deve priorizar leitura de dados, cadastro eficiente e tomada de decisão sobre custos, preços e vendas.
 
+O design visual das telas deve ser criado no Pencil. Codex não deve criar layout visual do zero quando houver etapa de design pendente.
+
+Codex deve implementar a UI a partir de `.pen` aprovado, validando antes se o protótipo respeita specs, APIs, permissões e restrições técnicas.
+
 ## Público
 
 - Dono do negócio: acompanha custos, define produtos, preços e margem.
@@ -33,5 +37,7 @@ Criar uma interface clara, rápida e confiável para uso recorrente. O produto d
 Nenhuma task de UI pode iniciar sem:
 
 - Task completa no ClickUp.
-- Arquivo `.pen` criado ou revisado.
-- Revisão do `.pen` contra specs e API.
+- Arquivo `.pen` criado pelo Pencil ou dispensa explícita registrada.
+- Revisão visual/técnica do `.pen` contra specs e API.
+- Handoff para Codex atualizado.
+- Aprovação visual registrada em `pencil-review.md`.

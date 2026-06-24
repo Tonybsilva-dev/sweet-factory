@@ -62,9 +62,23 @@ Componentes visuais esperados:
 
 ## Tokens visuais
 
-Os tokens finais devem ser definidos ou confirmados no `.pen`.
+Os tokens finais devem ser definidos ou confirmados no `.pen` aprovado pelo Pencil.
 
-Enquanto não houver `.pen`, usar padrões do shadcn/ui e tema atual da aplicação.
+Enquanto não houver `.pen` aprovado, Codex não deve implementar tela nova nem inventar sistema visual. A única exceção é uma dispensa explícita do responsável registrada na task e no handoff.
+
+Codex pode mapear os tokens do `.pen` para shadcn/ui e Tailwind CSS, mas não deve alterar paleta, espaçamento, radius, hierarquia ou composição por preferência própria.
+
+## Fonte visual
+
+Pencil é a fonte principal para criação visual das telas.
+
+Este arquivo documenta princípios e componentes esperados, mas o visual final de cada tela deve vir do `.pen` aprovado.
+
+Se houver conflito:
+
+- Specs/API vencem em regra funcional.
+- `.pen` aprovado vence em decisão visual.
+- Codex registra divergência e pede decisão antes de implementar.
 
 ## Referência visual Trinketos
 

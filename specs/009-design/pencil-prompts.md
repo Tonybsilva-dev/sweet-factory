@@ -4,10 +4,13 @@ Este arquivo reúne os prompts oficiais para criação de protótipos `.pen` no 
 
 ## Regras
 
-- Pencil é apoio visual.
-- Codex valida e implementa.
-- Specs e API são fonte da verdade.
-- Se houver conflito entre `.pen` e specs, specs vencem.
+- Pencil é a fonte principal para criação visual das telas.
+- Pencil deve criar o design visual completo, incluindo layout, hierarquia, estados, responsividade e componentes.
+- Codex valida tecnicamente e implementa fielmente o `.pen` aprovado.
+- Specs e API são fonte da verdade funcional.
+- Pencil/`.pen` vence em decisões visuais aprovadas.
+- Se houver conflito entre `.pen` e specs/API, registrar a divergência para decisão humana antes de implementar.
+- Codex não deve inventar layout visual sem protótipo aprovado, salvo dispensa explícita do responsável.
 - Não inventar regra de negócio no protótipo.
 - Não criar fluxo visual sem API/spec correspondente, salvo quando marcado como pendência.
 - O design deve ser compatível com shadcn/ui, Tailwind CSS, React Hook Form + Zod e os componentes previstos em `/specs/004-ui/components.md`.
@@ -15,6 +18,16 @@ Este arquivo reúne os prompts oficiais para criação de protótipos `.pen` no 
 - Usar `specs/009-design/trinketos-visual-reference.md` como referência visual e estrutural pública.
 - Não copiar textos de negócio do Trinketos.
 - Não incluir cadastro público no Sweet Factory.
+
+## Estrutura esperada do `.pen`
+
+- Criar um frame `Design System` ou equivalente com todos os componentes reutilizáveis.
+- Criar cada página/estado em frame próprio.
+- Agrupar frames por fluxo usando nomes claros.
+- Frames de página devem apontar para componentes do design system ou corresponder claramente a eles.
+- Incluir estados loading, erro, vazio, sucesso e permissão quando aplicável.
+- Indicar responsividade desktop/mobile.
+- Não entregar apenas wireframes genéricos se a task pedir protótipo visual aprovado.
 
 ## Prompt 1 — Base visual das rotas públicas
 
@@ -25,7 +38,7 @@ Produto:
 Sweet Factory é um SaaS operacional para precificação, cardápio e controle de custos de pequenos negócios de alimentação.
 
 Objetivo:
-Desenhar a experiência pública antes da implementação web, priorizando clareza, confiança e conversão para login, sem criar funcionalidades fora das specs.
+Desenhar a experiência pública visual completa antes da implementação web, priorizando clareza, confiança e conversão para login, sem criar funcionalidades fora das specs.
 
 Rotas obrigatórias:
 - /
@@ -42,6 +55,9 @@ Rotas obrigatórias:
 
 Regras:
 - Nomear cada tela com sua rota.
+- Criar cada tela/estado como frame próprio.
+- Criar frame de design system com componentes reutilizáveis.
+- Fazer as telas seguirem o design system criado no `.pen`.
 - Incluir estado normal de cada tela.
 - Incluir loading, erro e vazio quando aplicável.
 - Usar textos em português.
@@ -298,6 +314,9 @@ Checklist obrigatório:
   - 404
   - loading/splash
 - Cada tela está nomeada com sua rota.
+- Cada página/estado está em frame próprio.
+- Existe frame `Design System` ou equivalente com componentes reutilizáveis.
+- Frames de página apontam para o design system ou correspondem claramente aos componentes definidos nele.
 - Cada tela tem estado normal.
 - Login tem loading e erro.
 - Recuperação de acesso cobre request, verify e reset.
@@ -314,6 +333,7 @@ Checklist obrigatório:
 - Não existe cadastro público.
 - Não existe fluxo visual sem spec/API correspondente, salvo quando marcado como pendência.
 - Conflitos com specs foram registrados para revisão do Codex.
+- O `.pen` está pronto para aprovação visual antes da implementação.
 
 Saída esperada:
 - Arquivo .pen salvo.
@@ -328,3 +348,4 @@ Saída esperada:
 - Export visual para revisão, se necessário.
 - Observações registradas em `pencil-review.md`.
 - Task do ClickUp atualizada com o resultado.
+- Status de aprovação visual registrado antes de qualquer implementação.

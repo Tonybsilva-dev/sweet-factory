@@ -73,6 +73,8 @@ Se o CLI pedir confirmação, manter:
 17. Não mover `/specs` para dentro de `/application`.
 18. Antes de implementar UI, ler `/specs/004-ui` e `/specs/009-design`.
 19. Nenhuma task de UI pode iniciar sem task completa no ClickUp e revisão do `.pen`.
+20. Codex não deve criar visual de telas do zero quando houver etapa de design pendente.
+21. Para UI, Pencil é a fonte principal de criação visual; Codex valida tecnicamente e implementa fielmente o `.pen` aprovado.
 
 ## Regras de design, Pencil e `.pen`
 
@@ -81,9 +83,27 @@ O projeto separa funcionalidade de experiência visual:
 * `/specs/004-ui` define funcionalidade: páginas, fluxos e componentes esperados.
 * `/specs/009-design` define experiência visual: layout, estados, responsividade, protótipos Pencil e handoff para implementação.
 
-Pencil é apoio visual. Codex valida e implementa.
+Pencil é a ferramenta responsável por criar o design visual das telas.
 
-As specs de produto, API e regras de negócio são a fonte da verdade. Se houver conflito entre um arquivo `.pen` e as specs, as specs vencem.
+Codex não deve inventar layout visual, composição, hierarquia, estilo ou padrões de tela por preferência própria quando houver etapa de design pendente.
+
+Codex deve usar o `.pen` aprovado como referência visual principal para implementação. O papel do Codex é validar tecnicamente o `.pen` contra specs, APIs, permissões e restrições da aplicação, registrar divergências e implementar de forma fiel depois do handoff.
+
+As specs de produto, API e regras de negócio são a fonte da verdade funcional. Se houver conflito entre um arquivo `.pen` e as specs/API, o agente deve registrar a divergência e pedir decisão antes de implementar.
+
+Em decisões visuais aprovadas, Pencil/`.pen` vence. Codex não deve alterar visual aprovado por preferência própria.
+
+Se não houver `.pen` aprovado, a tela não deve ser implementada, salvo autorização explícita do responsável dispensando o protótipo.
+
+Ordem obrigatória para UI:
+
+1. Specs funcionais existentes.
+2. Referência visual documentada.
+3. Prompt do Pencil.
+4. Arquivo `.pen` gerado.
+5. Revisão visual/técnica do `.pen`.
+6. Handoff para Codex.
+7. Implementação pelo Codex.
 
 Antes de iniciar qualquer task de UI, o agente deve confirmar:
 
@@ -91,9 +111,13 @@ Antes de iniciar qualquer task de UI, o agente deve confirmar:
 * Task completa conforme as regras de ClickUp.
 * Arquivo `.pen` disponível em `/specs/009-design/prototypes` ou revisão explícita dispensando protótipo.
 * Revisão do `.pen` registrada ou atualizada em `/specs/009-design/pencil-review.md`.
+* Handoff para Codex atualizado em `/specs/009-design/handoff-to-codex.md`.
 * Rotas, permissões e contratos de API conferidos nas specs.
+* Estados de loading, erro, vazio, sucesso e permissão definidos.
+* Responsividade definida.
+* APIs consumidas mapeadas.
 
-O agente não deve implementar UI apenas a partir do `.pen`. O `.pen` orienta composição visual, mas não cria regra de negócio, contrato de API, permissão ou fluxo não documentado.
+O agente não deve implementar UI apenas a partir do `.pen`. O `.pen` define visual aprovado, mas não cria regra de negócio, contrato de API, permissão ou fluxo não documentado.
 
 ## Regras de ClickUp e versionamento
 
